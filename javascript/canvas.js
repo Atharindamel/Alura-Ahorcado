@@ -1,5 +1,6 @@
-var pantalla = document.querySelector("canvas");
-var pincel = pantalla.getContext("2d");
+let pantalla = document.querySelector("canvas");
+let pincel = pantalla.getContext("2d");
+let intentos = 6;
 
 //Triángulo
 pincel.fillStyle = "black";
@@ -29,6 +30,7 @@ pincel.lineWidth = 3;
 pincel.moveTo(340,350);
 pincel.lineTo(340,400);
 pincel.stroke();
+
 
 //Cabeza
 pincel.fillStyle = "black";
@@ -76,3 +78,17 @@ pincel.lineWidth = 4;
 pincel.moveTo(340,650);
 pincel.lineTo(265,725);
 pincel.stroke();
+
+for (var i= 0; i < numeroLetras; i++){
+    var separacionLinea = 450 + (i*60);
+    
+    dibujarLinea(separacionLinea);
+}
+
+function dibujarLinea(separacionLinea){
+        pincel.fillStyle = "black";
+        pincel.lineWidth = 6;
+        pincel.moveTo(separacionLinea, 700);
+        pincel.lineTo((separacionLinea + 30), 700);
+        pincel.stroke();
+    }

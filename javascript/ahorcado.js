@@ -4,6 +4,20 @@ var poolPalabras = ["XILOFON", "ORNITORRINCO", "PARALELEPIPEDO", "CENTURION", "R
 botonJugar.addEventListener("click",function(event){
     event.preventDefault();
     window.scroll(0,800);
-    var palabraSorteada = Math.floor(Math.random()*(poolPalabras.length-0));
+    var numeroOrden = Math.floor(Math.random()*(poolPalabras.length-0));
+    var palabraSorteada = poolPalabras[numeroOrden];
+    var palabraDeletreada = palabraSorteada.split('');
+    var numeroLetras = palabraDeletreada.length;
     
+    return numeroLetras;
 });
+
+/*
+function jugar(palabraDeletreada){
+    
+    var letraPropuesta =
+    var letrasIndicadas = [];
+    
+    for
+
+} */
