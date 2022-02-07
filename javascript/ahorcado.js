@@ -3,6 +3,7 @@ var poolPalabras = ["XILOFON", "ORNITORRINCO", "PARALELEPIPEDO", "CENTURION", "R
 var poolLetrasEquivocadas = [];
 var letraActual = "";
 var palabraDeletreada = [];
+var intentos = 6;
 
 botonJugar.addEventListener("click",function(event){
     event.preventDefault();
@@ -28,15 +29,45 @@ function dibujarGuiones (numeroLetras) {
 }
 
 document.addEventListener('keydown',(event) => {
-    letraActual = event.key.toUpperCase(); 
-    console.log(letraActual);
-    var posiciones = [];
-    posiciones = estaEn();
-//    console.log(posiciones);
-    if (posiciones.length == 0){
-        agregarLetraEquivocada();
+    if (intentos > 0) {
+        letraActual = event.key.toUpperCase(); 
+        console.log(letraActual);
+        var posiciones = [];
+        posiciones = estaEn();
+    //    console.log(posiciones);
+        if (posiciones.length == 0){
+            agregarLetraEquivocada();
+            intentos --;
+            if (intentos <= 5){
+                dibujarCabeza();
+            }
+            if (intentos <= 4){
+                dibujarCuerpo();
+            }
+            if (intentos <= 3){
+                dibujarBrazoDerecho();
+            }
+            if (intentos <=2){
+                dibujarBrazoIzquierdo();
+            }
+            if (intentos <=1){
+                dibujarPiernaDerecha();
+            }
+            if (intentos <=0){
+                dibujarPiernaIzquierda();
+            }
+            
+        }
+    } else {
+        for (var i = 0; i < palabraDeletreada; i++){
+            if (posiciones == letraActual){
+                dibujarLetras(letraActual);
+            } else {
+                dibujarGuiones()
+            }
+            alert("perdiste");
+        }
     }
-    
 });
 
 function estaEn (){

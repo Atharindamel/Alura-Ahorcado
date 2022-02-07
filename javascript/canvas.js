@@ -1,7 +1,7 @@
 let pantalla = document.querySelector("canvas");
 let pincel = pantalla.getContext("2d");
-var intentos = 6;
 
+var letrasDibujadas
 
 function dibujarHorca(){
 
@@ -35,7 +35,7 @@ function dibujarHorca(){
     pincel.stroke();
 }
 
-if (intentos <6) {
+function dibujarCabeza() {
     //Cabeza
     pincel.fillStyle = "black";
     pincel.beginPath();
@@ -50,8 +50,7 @@ if (intentos <6) {
 
 }
 
-if (intentos < 5) {
-    
+function dibujarCuerpo() {
     //cuerpo
     pincel.fillStyle = "black";
     pincel.lineWidth = 4;
@@ -60,8 +59,7 @@ if (intentos < 5) {
     pincel.stroke();
 }
 
-if (intentos < 4) {
-    
+function dibujarBrazoIzquierdo() {
     //brazo izquierdo
     pincel.fillStyle = "black";
     pincel.lineWidth = 4;
@@ -70,8 +68,7 @@ if (intentos < 4) {
     pincel.stroke();
 }
 
-if (intentos < 3) {
-    
+function dibujarBrazoDerecho() {
     //brazo derecho
     pincel.fillStyle = "black";
     pincel.lineWidth = 4;
@@ -80,21 +77,23 @@ if (intentos < 3) {
     pincel.stroke();
 }
 
-//pierna derecha
-pincel.fillStyle = "black";
-pincel.lineWidth = 4;
-pincel.moveTo(340,650);
-pincel.lineTo(415,725);
-pincel.stroke();
+function dibujarPiernaDerecha(){
+    //pierna derecha
+    pincel.fillStyle = "black";
+    pincel.lineWidth = 4;
+    pincel.moveTo(340,650);
+    pincel.lineTo(415,725);
+    pincel.stroke();
+}
 
-//pierna izquierda
-pincel.fillStyle = "black";
-pincel.lineWidth = 4;
-pincel.moveTo(340,650);
-pincel.lineTo(265,725);
-pincel.stroke();
-
-var separacionLinea = 430 
+function dibujarPiernaIzquierda(){
+    //pierna izquierda
+    pincel.fillStyle = "black";
+    pincel.lineWidth = 4;
+    pincel.moveTo(340,650);
+    pincel.lineTo(265,725);
+    pincel.stroke();
+}
 
 function dibujarLinea(separacionLinea){
         pincel.fillStyle = "black";
@@ -103,3 +102,8 @@ function dibujarLinea(separacionLinea){
         pincel.lineTo((separacionLinea + 30), 700);
         pincel.stroke();
     }
+
+function dibujarLetras(){
+    pincel.font = "italic 60 px Arial";
+    pincel.strokeStyle = ""
+}
