@@ -103,7 +103,7 @@ function dibujarLinea(separacionLinea){
         pincel.stroke();
     }
 
-function dibujarLetras(){
-    pincel.font = "italic 60 px Arial";
-    pincel.strokeStyle = ""
+function dibujarLetra(letraActual,x,y){
+    pincel.font = "20pt Arial";
+    pincel.strokeText = (letraActual,x,y)
 }

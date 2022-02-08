@@ -4,13 +4,15 @@ var poolLetrasEquivocadas = [];
 var letraActual = "";
 var palabraDeletreada = [];
 var intentos = 6;
+var palabraSorteada = "";
+let validador = new RegExp('A-Z');
 
 botonJugar.addEventListener("click",function(event){
     event.preventDefault();
     window.scroll(0,800);
     
     var numeroOrden = Math.floor(Math.random()*(poolPalabras.length-0));
-    var palabraSorteada = poolPalabras[numeroOrden];
+    palabraSorteada = poolPalabras[numeroOrden];
     console.log(palabraSorteada);
     palabraDeletreada = palabraSorteada.split('');
     var numeroLetras = palabraDeletreada.length;
@@ -29,44 +31,52 @@ function dibujarGuiones (numeroLetras) {
 }
 
 document.addEventListener('keydown',(event) => {
-    if (intentos > 0) {
-        letraActual = event.key.toUpperCase(); 
-        console.log(letraActual);
-        var posiciones = [];
-        posiciones = estaEn();
-    //    console.log(posiciones);
-        if (posiciones.length == 0){
-            agregarLetraEquivocada();
-            intentos --;
-            if (intentos <= 5){
-                dibujarCabeza();
+    letraActual = event.key.toUpperCase();
+
+    if(validador.test(letraActual)){
+        if (intentos > 0) {
+            //      console.log(letraActual);
+                var posiciones = [];
+                posiciones = estaEn();
+            //      console.log(posiciones);
+                if (posiciones.length == 0){
+                    agregarLetraEquivocada();
+                    intentos --;
+                    var x = 400 + (intentos - 5 * 45);
+                    var y = 700;
+                    dibujarLetra(letraActual,x,y);
+                    if (intentos == 5){
+                        dibujarCabeza();
+                    }
+                    if (intentos == 4){
+                        dibujarCuerpo();
+                    }
+                    if (intentos == 3){
+                        dibujarBrazoDerecho();
+                    }
+                    if (intentos ==2){
+                        dibujarBrazoIzquierdo();
+                    }
+                    if (intentos ==1){
+                        dibujarPiernaDerecha();
+                    }
+                    if (intentos ==0){
+                        dibujarPiernaIzquierda();
+                        alert("perdiste");
+                    }
+                } else {
+                    for (var i = 0; i < palabraDeletreada.length; i++){
+                    if (i == letraActual){
+                        dibujarLetras(letraActual);
+                    } else {
+                        dibujarGuiones()
+                    }
+                }
             }
-            if (intentos <= 4){
-                dibujarCuerpo();
-            }
-            if (intentos <= 3){
-                dibujarBrazoDerecho();
-            }
-            if (intentos <=2){
-                dibujarBrazoIzquierdo();
-            }
-            if (intentos <=1){
-                dibujarPiernaDerecha();
-            }
-            if (intentos <=0){
-                dibujarPiernaIzquierda();
-            }
-            
+
         }
     } else {
-        for (var i = 0; i < palabraDeletreada; i++){
-            if (posiciones == letraActual){
-                dibujarLetras(letraActual);
-            } else {
-                dibujarGuiones()
-            }
-            alert("perdiste");
-        }
+        console.log("Comando no válido");
     }
 });
 
@@ -78,7 +88,6 @@ function estaEn (){
 //            console.log(posiciones)
         }
     }
-    
     return posiciones;
 }
 
@@ -100,4 +109,17 @@ function agregarLetraEquivocada () {
         }
     }
     console.log(poolLetrasEquivocadas);
+}
+
+function validarLetra (){
+    
+    for (var i = 0; i < palabraDeletreada.length; i++){
+        if (palabraDeletreada[i] == letraActual){
+            replace
+        }
+    }
+
+    if (validador.test(palabraSorteada)){
+
+}
 }
