@@ -92,3 +92,8 @@ function dibujarLinea(separacionLinea){
         pincel.lineTo((separacionLinea + 30), 700);
         pincel.stroke();
     }
+
+function dibujarLetras(){
+    pincel.font = "italic 60 px Arial";
+    pincel.strokeStyle = ""
+}
