@@ -4,6 +4,7 @@ var poolLetrasEquivocadas = [];
 var letraActual = "";
 var palabraDeletreada = [];
 var intentos = 6;
+var numeroLetras = "";
 
 botonJugar.addEventListener("click",function(event){
     event.preventDefault();
@@ -12,7 +13,7 @@ botonJugar.addEventListener("click",function(event){
     var palabraSorteada = poolPalabras[numeroOrden];
     console.log(palabraSorteada);
     palabraDeletreada = palabraSorteada.split('');
-    var numeroLetras = palabraDeletreada.length;
+    numeroLetras = palabraDeletreada.length;
     
     dibujarGuiones (numeroLetras);
     dibujarHorca();
@@ -37,25 +38,24 @@ document.addEventListener('keydown',(event) => {
         if (posiciones.length == 0){
             agregarLetraEquivocada();
             intentos --;
-            if (intentos <= 5){
+            if (intentos == 5){
                 dibujarCabeza();
             }
-            if (intentos <= 4){
+            if (intentos == 4){
                 dibujarCuerpo();
             }
-            if (intentos <= 3){
-                dibujarBrazoDerecho();
+            if (intentos == 3){
+                dibujarBrazo(265);
             }
-            if (intentos <=2){
-                dibujarBrazoIzquierdo();
+            if (intentos ==2){
+                dibujarBrazo(415);
             }
-            if (intentos <=1){
-                dibujarPiernaDerecha();
+            if (intentos ==1){
+                dibujarPierna(265);
             }
-            if (intentos <=0){
-                dibujarPiernaIzquierda();
+            if (intentos ==0){
+                dibujarPierna(415);
             }
-            
         }
     } else {
         for (var i = 0; i < palabraDeletreada; i++){
