@@ -1,10 +1,11 @@
 var botonJugar = document.getElementById("iniciar-juego");
 var poolPalabras = ["XILOFON", "ORNITORRINCO", "PARALELEPIPEDO", "CENTURION", "ROMANI", "ARAUCARIA", "MURCIELAGO", "DANTESCO", "ARTILLERIA"];
-var poolLetrasEquivocadas = [];
+var LetrasEquivocadas = [];
 var letraActual = "";
 var palabraDeletreada = [];
-var intentos = 6;
+var fallos = 0;
 var numeroLetras = "";
+var letrasCorrectas = [];
 
 botonJugar.addEventListener("click",function(event){
     event.preventDefault();
@@ -13,7 +14,11 @@ botonJugar.addEventListener("click",function(event){
     var palabraSorteada = poolPalabras[numeroOrden];
     console.log(palabraSorteada);
     palabraDeletreada = palabraSorteada.split('');
-    numeroLetras = palabraDeletreada.length;
+    var numeroLetras = palabraDeletreada.length;
+    for(var i = 0; i < numeroLetras; i++){
+        letrasCorrectas[i] = '';
+        console.log(letrasCorrectas);
+    }
     
     dibujarGuiones (numeroLetras);
     dibujarHorca();
@@ -29,56 +34,57 @@ function dibujarGuiones (numeroLetras) {
 }
 
 document.addEventListener('keydown',(event) => {
-    if (intentos > 0) {
-        letraActual = event.key.toUpperCase(); 
-        console.log(letraActual);
-        var posiciones = [];
-        posiciones = estaEn();
-    //    console.log(posiciones);
-        if (posiciones.length == 0){
-            agregarLetraEquivocada();
-            intentos --;
-            if (intentos == 5){
-                dibujarCabeza();
+    letraActual = event.key.toUpperCase(); 
+    console.log(letraActual);
+    var validador = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+//    var posiciones = [];
+//    posiciones = estaEn();
+    for (var i = 0; i < validador.length; i++){
+        if (letraActual == validador[i]){
+            for (var j = 0; j < palabraDeletreada.length; j++){
+                if (letraActual == palabraDeletreada[j]){
+                    letrasCorrectas.splice(j,1,letraActual)
+                    console.log(letrasCorrectas);
+                }else{
+                    fallos ++;
+        
+                    if (fallos == 1){
+                        dibujarCabeza();
+                    }
+                    if (fallos == 2){
+                        dibujarCuerpo();
+                    }
+                    if (fallos == 3){
+                        dibujarBrazo(265);
+                    }
+                    if (fallos ==4){
+                        dibujarBrazo(415);
+                    }
+                    if (fallos ==5){
+                        dibujarPierna(265);
+                    }
+                    if (fallos ==6){
+                        dibujarPierna(415);
+                    }
+                }
             }
-            if (intentos == 4){
-                dibujarCuerpo();
-            }
-            if (intentos == 3){
-                dibujarBrazo(265);
-            }
-            if (intentos ==2){
-                dibujarBrazo(415);
-            }
-            if (intentos ==1){
-                dibujarPierna(265);
-            }
-            if (intentos ==0){
-                dibujarPierna(415);
-            }
+        } else {
+            console.log("Tecla indicada no es correcta");
         }
-    } else {
-        for (var i = 0; i < palabraDeletreada; i++){
-            if (posiciones == letraActual){
-                dibujarLetras(letraActual);
-            } else {
-                dibujarGuiones()
-            }
-            alert("perdiste");
-        }
+    }
+    if (palabraDeletreada === letrasCorrectas) {
+        console.log("Ganaste!")
     }
 });
 
 function estaEn (){
-    var posiciones = [];
     for (var i = 0; i < palabraDeletreada.length; i++){
-        if (letraActual == palabraDeletreada[i]) {
-            posiciones.push(i);
-//            console.log(posiciones)
+        if (letraActual == palabraDeletreada[i]){
+            letrasCorrectas.push(i);
+//            console.log(letrasCorrectas);
         }
     }
-    
-    return posiciones;
+    return letrasCorrectas;
 }
 
 function agregarLetraEquivocada () {
