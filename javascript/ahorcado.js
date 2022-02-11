@@ -113,4 +113,3 @@ function revisarLetraEquivocada(){
 
     return letraRepetida;
 }
-
