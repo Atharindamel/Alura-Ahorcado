@@ -1,11 +1,13 @@
 var botonJugar = document.getElementById("iniciar-juego");
 var poolPalabras = ["XILOFON", "ORNITORRINCO", "PARALELEPIPEDO", "CENTURION", "ROMANI", "ARAUCARIA", "MURCIELAGO", "DANTESCO", "ARTILLERIA"];
-var LetrasEquivocadas = [];
+var validador = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var letrasEquivocadas = [];
 var letraActual = "";
 var palabraDeletreada = [];
 var fallos = 0;
 var numeroLetras = "";
 var letrasCorrectas = [];
+var perdiste = false;
 
 botonJugar.addEventListener("click",function(event){
     event.preventDefault();
@@ -17,8 +19,8 @@ botonJugar.addEventListener("click",function(event){
     var numeroLetras = palabraDeletreada.length;
     for(var i = 0; i < numeroLetras; i++){
         letrasCorrectas[i] = '';
-        console.log(letrasCorrectas);
     }
+    console.log(letrasCorrectas);
     
     dibujarGuiones (numeroLetras);
     dibujarHorca();
@@ -34,46 +36,61 @@ function dibujarGuiones (numeroLetras) {
 }
 
 document.addEventListener('keydown',(event) => {
+    if (perdiste) {
+        return;
+    }
     letraActual = event.key.toUpperCase(); 
     console.log(letraActual);
-    var validador = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-//    var posiciones = [];
-//    posiciones = estaEn();
-    for (var i = 0; i < validador.length; i++){
-        if (letraActual == validador[i]){
-            for (var j = 0; j < palabraDeletreada.length; j++){
-                if (letraActual == palabraDeletreada[j]){
-                    letrasCorrectas.splice(j,1,letraActual)
-                    console.log(letrasCorrectas);
-                }else{
-                    fallos ++;
-        
-                    if (fallos == 1){
-                        dibujarCabeza();
-                    }
-                    if (fallos == 2){
-                        dibujarCuerpo();
-                    }
-                    if (fallos == 3){
-                        dibujarBrazo(265);
-                    }
-                    if (fallos ==4){
-                        dibujarBrazo(415);
-                    }
-                    if (fallos ==5){
-                        dibujarPierna(265);
-                    }
-                    if (fallos ==6){
-                        dibujarPierna(415);
-                    }
-                }
-            }
-        } else {
-            console.log("Tecla indicada no es correcta");
-        }
+    //    var posiciones = [];
+    //    posiciones = estaEn();
+    var esLetra = false;
+    for(var i = 0; i < validador.length; i++){
+        if(letraActual === validador [i])
+        esLetra = true;
     }
-    if (palabraDeletreada === letrasCorrectas) {
-        console.log("Ganaste!")
+    if (esLetra === true){
+        var encontrada = false;
+        var palabraCompleta = true;
+        for (var j = 0; j < palabraDeletreada.length; j++){
+            if (letraActual === palabraDeletreada[j]){
+                letrasCorrectas.splice(j,1,letraActual)
+                console.log(letrasCorrectas);
+                encontrada = true;
+                }
+            if (letrasCorrectas[j] == ''){
+                palabraCompleta = false;
+            }
+        }
+        if (palabraCompleta == true){
+            console.log("Ganaste!");
+        }
+        if (!encontrada && !revisarLetraEquivocada()){
+            
+            fallos ++;
+
+            if (fallos == 1){
+                dibujarCabeza();
+            }
+            if (fallos == 2){
+                dibujarCuerpo();
+            }
+            if (fallos == 3){
+                dibujarBrazo(265);
+            }
+            if (fallos ==4){
+                dibujarBrazo(415);
+            }
+            if (fallos ==5){
+                dibujarPierna(265);
+            }
+            if (fallos ==6){
+                dibujarPierna(415);
+                console.log("Perdiste");
+                perdiste = true;
+            }
+        }
+    }else{
+        console.log("Tecla indicada no es correcta");
     }
 });
 
@@ -87,12 +104,13 @@ function estaEn (){
     return letrasCorrectas;
 }
 
-function agregarLetraEquivocada () {
+// Revisa que la letra equivocada no haya sido previamente seleccionada
+function revisarLetraEquivocada(){
     var letraRepetida = false;
-    if (poolLetrasEquivocadas.length == 0){
-        poolLetrasEquivocadas.push(letraActual);
+    if (letrasEquivocadas.length == 0){
+        letrasEquivocadas.push(letraActual);
     }else{
-        poolLetrasEquivocadas.forEach((value) =>{
+        letrasEquivocadas.forEach((value) =>{
             console.log(value);
             if (letraActual == value){
                 letraRepetida = true;
@@ -101,8 +119,10 @@ function agregarLetraEquivocada () {
         if(letraRepetida){
             console.log("Error");
         } else {
-            poolLetrasEquivocadas.push(letraActual);
+            letrasEquivocadas.push(letraActual);
         }
     }
-    console.log(poolLetrasEquivocadas);
+    console.log(letrasEquivocadas);
+
+    return letraRepetida;
 }
