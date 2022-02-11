@@ -88,7 +88,12 @@ function dibujarLinea(separacionLinea){
         pincel.stroke();
     }
 
-function dibujarLetras(){
-    pincel.font = "italic 60 px Arial";
-    pincel.strokeStyle = ""
+function dibujarLetrasEquivocadas(texto,x){
+    pincel.font = "italic 60px Arial";
+    pincel.strokeText(texto,450 + 45 * x,400);
+}
+
+function dibujarLetraCorrecta (texto,j){
+    pincel.font = "italic 30px Arial";
+    pincel.strokeText(texto, 435 + j * 45, 690);
 }

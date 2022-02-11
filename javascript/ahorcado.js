@@ -21,14 +21,11 @@ botonJugar.addEventListener("click",function(event){
         letrasCorrectas[i] = '';
     }
     console.log(letrasCorrectas);
-    
     dibujarGuiones (numeroLetras);
     dibujarHorca();
-
 });
 
 function dibujarGuiones (numeroLetras) {
-
     for (var i = 0; i < numeroLetras; i++) {
         var offset = 430 + (45 * i);
         dibujarLinea(offset);
@@ -36,13 +33,11 @@ function dibujarGuiones (numeroLetras) {
 }
 
 document.addEventListener('keydown',(event) => {
-    if (perdiste) {
+    if (terminaste) {
         return;
     }
     letraActual = event.key.toUpperCase(); 
     console.log(letraActual);
-    //    var posiciones = [];
-    //    posiciones = estaEn();
     var esLetra = false;
     for(var i = 0; i < validador.length; i++){
         if(letraActual === validador [i])
@@ -53,7 +48,8 @@ document.addEventListener('keydown',(event) => {
         var palabraCompleta = true;
         for (var j = 0; j < palabraDeletreada.length; j++){
             if (letraActual === palabraDeletreada[j]){
-                letrasCorrectas.splice(j,1,letraActual)
+                letrasCorrectas.splice(j,1,letraActual);
+                dibujarLetraCorrecta(letraActual,j)
                 console.log(letrasCorrectas);
                 encontrada = true;
                 }
@@ -63,11 +59,12 @@ document.addEventListener('keydown',(event) => {
         }
         if (palabraCompleta == true){
             console.log("Ganaste!");
+            terminaste = true;
         }
         if (!encontrada && !revisarLetraEquivocada()){
             
+            dibujarLetras(letraActual,fallos);
             fallos ++;
-
             if (fallos == 1){
                 dibujarCabeza();
             }
@@ -86,23 +83,13 @@ document.addEventListener('keydown',(event) => {
             if (fallos ==6){
                 dibujarPierna(415);
                 console.log("Perdiste");
-                perdiste = true;
+                terminaste = true;
             }
         }
     }else{
         console.log("Tecla indicada no es correcta");
     }
 });
-
-function estaEn (){
-    for (var i = 0; i < palabraDeletreada.length; i++){
-        if (letraActual == palabraDeletreada[i]){
-            letrasCorrectas.push(i);
-//            console.log(letrasCorrectas);
-        }
-    }
-    return letrasCorrectas;
-}
 
 // Revisa que la letra equivocada no haya sido previamente seleccionada
 function revisarLetraEquivocada(){
@@ -126,3 +113,4 @@ function revisarLetraEquivocada(){
 
     return letraRepetida;
 }
+
