@@ -13,7 +13,7 @@ botonJugar.addEventListener("click",function(event){
     event.preventDefault();
     window.scroll(0,800);
     var numeroOrden = Math.floor(Math.random()*(poolPalabras.length-0));
-    var palabraSorteada = poolPalabras[numeroOrden];
+    palabraSorteada = poolPalabras[numeroOrden];
     console.log(palabraSorteada);
     palabraDeletreada = palabraSorteada.split('');
     var numeroLetras = palabraDeletreada.length;
