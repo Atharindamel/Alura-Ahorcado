@@ -1,3 +1,11 @@
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;
+}
 
 .titulo {
   padding: 15px;
@@ -30,4 +38,11 @@
 
 canvas {
   background-color:darkseagreen;
+}
+
+#footer {
+  background-color: chocolate;
+  position: absolute;
+  bottom: auto;
+  width: 100%;
 }

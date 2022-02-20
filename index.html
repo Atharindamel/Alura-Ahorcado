@@ -8,19 +8,29 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div style="text-align:center; margin: 50px 0px;">
-      <h1 class="titulo">Ahorcado</h1>
-      <button class="btn" id="iniciar-juego">INICIAR JUEGO</button>
+    <div id="page container">
+      <div id="content-wrap">
+        <div style="text-align:center; margin: 50px 0px;">
+          <h1 class="titulo">Ahorcado</h1>
+          <button class="btn" id="iniciar-juego">INICIAR JUEGO</button>
+        </div>
+        
+        <div style="text-align:center">
+          <input class="text-input" type="text" id="input-nueva-palabra" placeholder="Escriba una nueva palabra de cuatro letras o más">
+          <button class="btn" id="nueva-palabra">AGREGAR PALABRA</button> 
+        </div>
+        <div style="text-align:center;">
+          <canvas id="ahorcado" height="800px" width="1200px"></canvas>
+        </div>
+        <script type="text/javascript" src="javascript/ahorcado.js"></script>
+        <script type="text/javascript" src="javascript/canvas.js"></script>
+        <script type="text/javascript" src="javascript/agregar-palabras.js"></script>
+      </div>
+      <footer id="footer">
+        <p>Copyright: Leonel Juiz</p>
+        <p>El presente corresponde al segundo challenge de Alura Latam, en el marco del programa Oracle Next Education (ONE)</p>
+        <p>Quiero agradecer principalmente a Guillermo Genaro Canero y Horacio Arzamendía por su colaboración en los momentos de mayor necesidad, sin la cual, este trabajo no estaría desarrollado.</p>
+      </footer>
     </div>
-    <div style="text-align:center">
-      <input class="text-input" type="text" id="input-nueva-palabra" placeholder="Escriba una nueva palabra de cuatro letras o más">
-      <button class="btn" id="nueva-palabra">AGREGAR PALABRA</button> 
-    </div>
-    <div style="text-align:center;">
-      <canvas id="ahorcado" height="800px" width="1200px"></canvas>
-    </div>
-    <script type="text/javascript" src="javascript/ahorcado.js"></script>
-    <script type="text/javascript" src="javascript/canvas.js"></script>
-    <script type="text/javascript" src="javascript/agregar-palabras.js"></script>
   </body>
 </html>
